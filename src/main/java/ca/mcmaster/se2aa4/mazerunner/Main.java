@@ -24,7 +24,8 @@ public class Main {
 
         // Setup possible command line arguments.
         Options options = new Options();
-        options.addOption("i", true, "Path to a maze file");
+        options.addOption("i", true, "File path to a maze file");
+        options.addOption("p", true, "Path to verify on the provided maze");
         CommandLineParser parser = new DefaultParser();
 
         logger.info("| Starting Maze Runner");
@@ -46,10 +47,27 @@ public class Main {
             Maze maze = new Maze();
             maze.readMazeFromFile(maze_path);
 
+            // If a path is provided, verify it. Otherwise, find a valid path through the maze.
+            if (cmd.hasOption("p")) {
+                String provided_path = cmd.getOptionValue("p");
+
+                logger.info("| Validating path");
+
+                if (PathValidator.validatePath(maze.getMaze(), provided_path) == true) {
+                    logger.info("| Path is valid");
+                    System.exit(0);
+                }
+
+            } else {
+                logger.info("| Computing path");
+
+                MazeExplorer.findPathRightHand(maze.getMaze(), maze.getExits(), 'L');
+            }
+
         } catch(IOException | ParseException e) {
             logger.error("/!\\ An error has occured /!\\");
         }
-        logger.info("| Computing path");
+        
         logger.warn("| PATH NOT COMPUTED");
         logger.info("| End of MazeRunner");
     }

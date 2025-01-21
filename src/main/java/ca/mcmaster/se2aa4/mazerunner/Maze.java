@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Maze {
     private char[][] maze;
-    private int[] exits;
+    private final int[] exits = new int[2];
 
     public void readMazeFromFile(String maze_path) throws FileNotFoundException, IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(maze_path))) {
@@ -26,13 +26,16 @@ public class Maze {
     }
 
     public void findExitCoordinates() {
+        // Just set the values to template values for now
+        exits[0] = -1;
+        exits[1] = -1;
     }
 
     public char[][] getMaze() {
-        return maze;
+        return maze.clone();
     }
 
     public int[] getExits() {
-        return exits;
+        return exits.clone();
     }
 }
