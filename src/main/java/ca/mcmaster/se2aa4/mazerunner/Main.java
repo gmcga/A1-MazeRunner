@@ -50,10 +50,11 @@ public class Main {
             // If a path is provided, verify it. Otherwise, find a valid path through the maze.
             if (cmd.hasOption("p")) {
                 String provided_path = cmd.getOptionValue("p");
+                Path path = new Path(provided_path);
 
                 logger.info("| Validating path");
 
-                if (PathValidator.validatePath(maze.getMaze(), provided_path) == true) {
+                if (PathValidator.validatePath(maze.getMaze(), maze.getExits(), path.getPath()) == true) {
                     logger.info("| Path is valid");
                     System.exit(0);
                 }
@@ -61,14 +62,14 @@ public class Main {
             } else {
                 logger.info("| Computing path");
 
-                MazeExplorer.findPathRightHand(maze.getMaze(), maze.getExits(), 'L');
+                String found_path = MazeExplorer.findPathRightHand(maze.getMaze(), maze.getExits(), 'L');
+                logger.info("| Path found: " + found_path);
             }
 
         } catch(IOException | ParseException e) {
             logger.error("/!\\ An error has occured /!\\");
         }
         
-        logger.warn("| PATH NOT COMPUTED");
         logger.info("| End of MazeRunner");
     }
 }

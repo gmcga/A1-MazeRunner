@@ -15,9 +15,9 @@ public class Maze {
             while ((line = reader.readLine()) != null) {
                 for (int idx = 0; idx < line.length(); idx++) {
                     if (line.charAt(idx) == '#') {
-                        System.out.print("WALL ");
+                        System.out.print("WALL "); // Substitute this with logic to add an item to the maze array
                     } else if (line.charAt(idx) == ' ') {
-                        System.out.print("PASS ");
+                        System.out.print("PASS "); // Same thing here.
                     }
                 }
                 System.out.print(System.lineSeparator());
@@ -32,10 +32,10 @@ public class Maze {
     }
 
     public char[][] getMaze() {
-        return maze.clone();
+        return maze;
     }
 
     public int[] getExits() {
-        return exits.clone();
+        return exits;
     }
 }
