@@ -12,7 +12,7 @@ public class Maze {
 
     private static final Logger logger = LogManager.getLogger();
 
-    private char[][] maze;
+    private MazeCell[][] maze;
     private final int[] exits = new int[2];
 
     // It might make sense to refactor this and the makeMazeArray methods to just be a constructor.
@@ -24,20 +24,16 @@ public class Maze {
             int row = 0;
             while ((line = reader.readLine()) != null) {
                 for (int col = 0; col < line.length(); col++) {
-                    if (line.charAt(col) == '#') {
-                        maze[row][col] = '#'; 
-                        System.out.print('#');
-                    } else if (line.charAt(col) == ' ') {
-                        maze[row][col] = '-'; 
-                        System.out.print('-');
-                    }
+                    char c = line.charAt(col);
+                    maze[row][col] = MazeCell.fromChar(c);
+                    System.out.print(MazeCell.fromChar(c) + " ");
                 }
                 row++;
                 System.out.print("\n");
             }
-            
         }
     }
+
 
     private void makeMazeArray(String maze_path) throws FileNotFoundException, IOException {
         // Method to create a maze 2D array of the proper size.
@@ -51,8 +47,8 @@ public class Maze {
                 rows++;
             }
         }
-        logger.trace("| Creating a maze array of size " + rows + " x " + cols);
-        maze = new char[rows][cols];
+        logger.trace("| Creating a MazeCell array of size " + rows + " x " + cols);
+        maze = new MazeCell[rows][cols];
     }
 
     public void findExitCoordinates() {
@@ -61,8 +57,8 @@ public class Maze {
         exits[1] = 2;
     }
 
-    public char[][] getMaze() {
-        return maze;
+    public MazeCell[][] getMaze() {
+        return maze.clone();
     }
 
     public int[] getExits() {

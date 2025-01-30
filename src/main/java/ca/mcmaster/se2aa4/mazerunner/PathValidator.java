@@ -2,7 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class PathValidator {
 
-    public static boolean validatePath(char[][] maze, int[] exits, String path) {
+    public static boolean validatePath(MazeCell[][] maze, int[] exits, String path) {
         // Initialize the starting position at the entrance (row defined by exits[0], column 0)
         int[] pos = {exits[0], 0}; // Entrance position: row from exits, column 0. This is confusing to read and should be made more clear.
         Direction direction = Direction.EAST;

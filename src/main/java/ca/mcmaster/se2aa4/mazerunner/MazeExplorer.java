@@ -7,7 +7,7 @@ public class MazeExplorer {
 
     private static final Logger logger = LogManager.getLogger();
 
-    public static String findPathRightHand(char[][] maze, int[] exits, char starting_side) {
+    public static String findPathRightHand(MazeCell[][] maze, int[] exits, char starting_side) {
         // Assume we start at the left-side entrace of straight.maz.txt.
         int[] pos = {2, 0};
         Direction direction = Direction.EAST;
