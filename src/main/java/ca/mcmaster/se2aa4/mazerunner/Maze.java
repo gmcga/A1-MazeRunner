@@ -32,6 +32,8 @@ public class Maze {
                 System.out.print("\n");
             }
         }
+
+        findExitCoordinates();
     }
 
 
@@ -47,21 +49,41 @@ public class Maze {
                 rows++;
             }
         }
+
         logger.trace("| Creating a MazeCell array of size " + rows + " x " + cols);
         maze = new MazeCell[rows][cols];
     }
 
     public void findExitCoordinates() {
-        // Hardcoded specifically for straight.maz.txt
-        exits[0] = 2;
-        exits[1] = 2;
+        // Find the row on which the left and right exits occur.
+        int maze_length = maze.length;
+
+        for (int row = 0; row < maze_length; row++) {
+            if (maze[row][0] == MazeCell.PASS) {
+                exits[0] = row;
+                break;
+            }
+        }
+
+        for (int row = 0; row < maze_length; row++) {
+            if (maze[row][maze_length - 1] == MazeCell.PASS) {
+                exits[1] = row;
+                break;
+            }
+        }
+
+        logger.trace(String.format("| Found exit coordinates: %d, %d, %d, %d",
+        exits[0], 0, exits[1], maze_length-1));
     }
 
     public MazeCell[][] getMaze() {
+        // Getter for the maze 2D array.
         return maze.clone();
     }
 
     public int[] getExits() {
+        // Getter for the exit coordinates of the maze.
         return exits;
     }
+
 }
