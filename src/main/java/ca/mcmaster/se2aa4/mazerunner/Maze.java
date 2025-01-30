@@ -15,8 +15,13 @@ public class Maze {
     private MazeCell[][] maze;
     private final int[] exits = new int[2];
 
+    public Maze(String maze_path) throws IOException {
+        readMazeFromFile(maze_path);
+        findExitCoordinates();
+    }
+
     // It might make sense to refactor this and the makeMazeArray methods to just be a constructor.
-    public void readMazeFromFile(String maze_path) throws FileNotFoundException, IOException { 
+    private void readMazeFromFile(String maze_path) throws FileNotFoundException, IOException { 
         makeMazeArray(maze_path);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(maze_path))) {
@@ -32,10 +37,7 @@ public class Maze {
                 System.out.print("\n");
             }
         }
-
-        findExitCoordinates();
     }
-
 
     private void makeMazeArray(String maze_path) throws FileNotFoundException, IOException {
         // Method to create a maze 2D array of the proper size.
@@ -54,7 +56,7 @@ public class Maze {
         maze = new MazeCell[rows][cols];
     }
 
-    public void findExitCoordinates() {
+    private void findExitCoordinates() {
         // Find the row on which the left and right exits occur.
         int maze_length = maze.length;
 

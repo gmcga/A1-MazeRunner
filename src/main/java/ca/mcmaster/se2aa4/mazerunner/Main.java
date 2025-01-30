@@ -44,8 +44,7 @@ public class Main {
             logger.trace("| Reading the maze from file " + maze_path);
             
             // Create an instance of the Maze class and read it from the file provided.
-            Maze maze = new Maze();
-            maze.readMazeFromFile(maze_path);
+            Maze maze = new Maze(maze_path);
 
             // If a path is provided, verify it. Otherwise, find a valid path through the maze.
             if (cmd.hasOption("p")) {
