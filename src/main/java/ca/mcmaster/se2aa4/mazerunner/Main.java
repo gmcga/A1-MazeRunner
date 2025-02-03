@@ -68,7 +68,7 @@ public class Main {
                     SolvingMethod.RightHand, 
                     'L'
                     );
-                    
+
                 logger.info("| Path found: " + found_path);
             }
 
