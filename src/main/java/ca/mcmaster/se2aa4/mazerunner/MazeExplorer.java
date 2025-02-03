@@ -69,7 +69,7 @@ public class MazeExplorer {
         
 
 
-        return path.getPath();
+        return path.getFactorizedPath();
     }
 
 }

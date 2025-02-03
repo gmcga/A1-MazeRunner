@@ -62,7 +62,6 @@ public class Main {
 
             } else {
                 logger.info("| Computing path");
-
                 String found_path = MazeExplorer.findPath(
                     maze.getMaze(), maze.getExits(),
                     SolvingMethod.RightHand, 
