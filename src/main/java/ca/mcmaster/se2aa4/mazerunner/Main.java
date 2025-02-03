@@ -7,28 +7,14 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.config.Configurator;
 
 public class Main {
-
-    private static final Logger logger = LogManager.getLogger();
-
-    
-
     public static void main(String[] args) {
-        // Allow all levels of logging severity to be shown in the terminal.
-        Configurator.setAllLevels(LogManager.getRootLogger().getName(), Level.ALL);
-
         // Setup possible command line arguments.
         Options options = new Options();
         options.addOption("i", true, "File path to a maze file");
         options.addOption("p", true, "Path to verify on the provided maze");
         CommandLineParser parser = new DefaultParser();
-
-        logger.info("| Starting Maze Runner");
 
         try {
             // Get the maze path from the command line arguments.
@@ -37,12 +23,10 @@ public class Main {
 
             // Make sure there is a maze provided. If there isn't one, end the program.
             if (maze_path == null) {
-                logger.error(" | No path to maze file provided (-i). Terminating program.");
+                System.out.println(" No path to maze file provided (-i). Terminating program.");
                 System.exit(1);
             }
 
-            logger.trace("| Reading the maze from file " + maze_path);
-            
             // Create an instance of the Maze class and read it from the file provided.
             Maze maze = new Maze(maze_path);
 
@@ -51,30 +35,24 @@ public class Main {
                 String provided_path = cmd.getOptionValue("p");
                 Path path = new Path(provided_path);
 
-                logger.info("| Validating path");
-
                 if (PathValidator.validatePath(maze.getMaze(), maze.getExits(), path.getCanonicalizedPath()) == true) {
-                    logger.info("| Path is valid");
-                    System.exit(0);
+                    System.out.println("Path is valid");
                 } else {
-                    logger.info("| Path is invalid");
+                    System.out.println("Path is invalid");
                 }
 
             } else {
-                logger.info("| Computing path");
                 String found_path = MazeExplorer.findPath(
                     maze.getMaze(), maze.getExits(),
                     SolvingMethod.RightHand, 
                     'L'
                     );
 
-                logger.info("| Path found: " + found_path);
+                System.out.println(found_path);
             }
 
         } catch(IOException | ParseException e) {
-            logger.error("/!\\ An error has occured /!\\");
+            System.out.println("/!\\ An error has occured /!\\");
         }
-        
-        logger.info("| End of MazeRunner");
     }
 }

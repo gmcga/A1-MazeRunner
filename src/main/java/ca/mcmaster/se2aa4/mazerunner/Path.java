@@ -18,7 +18,6 @@ public class Path {
     
             if (c == ' ') {
                 // Skip spaces
-                continue;
             } else if (Character.isDigit(c)) {
                 // Accumulate digits, handle multi-digit numbers
                 count = (count * 10) + Character.getNumericValue(c);

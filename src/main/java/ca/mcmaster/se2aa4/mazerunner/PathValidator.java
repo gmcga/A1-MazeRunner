@@ -1,18 +1,13 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class PathValidator {
-    private static final Logger logger = LogManager.getLogger();
 
     // Method to validate a path provided by a user.
     public static boolean validatePath(MazeCell[][] maze, int[] exits, String path) {
-        logger.trace("| Validating a provided path");
-        logger.trace("| Trying from the left side");
         // Try starting from the left side, and if that doesn't work try from the right.
         if (!validatePathL(maze, exits, path)) {
-            logger.trace("| Validation from the left side failed, trying from the right");
+
             return validatePathR(maze, exits, path);
         }
         else {

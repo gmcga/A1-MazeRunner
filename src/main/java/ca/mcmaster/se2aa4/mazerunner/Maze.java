@@ -5,12 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class Maze {
-
-    private static final Logger logger = LogManager.getLogger();
 
     private MazeCell[][] maze;
     private final int[] exits = new int[2];
@@ -31,10 +26,9 @@ public class Maze {
                 for (int col = 0; col < line.length(); col++) {
                     char c = line.charAt(col);
                     maze[row][col] = MazeCell.fromChar(c);
-                    System.out.print(MazeCell.fromChar(c) + " ");
                 }
                 row++;
-                System.out.print("\n");
+                
             }
         }
     }
@@ -52,7 +46,6 @@ public class Maze {
             }
         }
 
-        logger.trace("| Creating a MazeCell array of size " + rows + " x " + cols);
         maze = new MazeCell[rows][cols];
     }
 
@@ -74,8 +67,6 @@ public class Maze {
             }
         }
 
-        logger.trace(String.format("| Found exit coordinates: %d, %d, %d, %d",
-        exits[0], 0, exits[1], maze_length-1));
     }
 
     public MazeCell[][] getMaze() {
