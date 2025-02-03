@@ -53,7 +53,7 @@ public class Main {
 
                 logger.info("| Validating path");
 
-                if (PathValidator.validatePath(maze.getMaze(), maze.getExits(), path.getPath()) == true) {
+                if (PathValidator.validatePath(maze.getMaze(), maze.getExits(), path.getCanonicalizedPath()) == true) {
                     logger.info("| Path is valid");
                     System.exit(0);
                 } else {

@@ -2,15 +2,42 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class Path {
 
-    private StringBuilder path;
+    private final StringBuilder path;
 
     public Path(String provided_path) {
         this.path = new StringBuilder(provided_path);
     }
 
     // Convert a path to canonical form for ease of use in other classes/methods.
-    private void canonicalizePath() {
-        this.path = this.path; // Not implementing this logic right now.
+    private String canonicalizePath() {
+        StringBuilder canonicalized_path = new StringBuilder();
+        int count = 0;  // Start with 0; if no digit is provided, we'll default to 1.
+    
+        for (int i = 0; i < path.length(); i++) {
+            char c = path.charAt(i);
+    
+            if (c == ' ') {
+                // Skip spaces
+                continue;
+            } else if (Character.isDigit(c)) {
+                // Accumulate digits, handle multi-digit numbers
+                count = (count * 10) + Character.getNumericValue(c);
+            } else if (c == 'F' || c == 'R' || c == 'L') {
+                // If no count was specified, default to 1.
+                if (count == 0) {
+                    count = 1;
+                }
+                // Append the command letter 'count' times.
+                for (int j = 0; j < count; j++) {
+                    canonicalized_path.append(c);
+                }
+                // Reset count for the next command.
+                count = 0;
+            } else {
+                throw new RuntimeException("Invalid path provided.");
+            }
+        }
+        return canonicalized_path.toString().trim();
     }
 
     // Convert a path to factorized form to display to the user.
@@ -39,13 +66,17 @@ public class Path {
         path.append(movement);
     }
 
-    // Getters for the path or its factorized version.
+    // Getters for the path or its factorized/canonicalized versions.
     public String getPath() {
         return path.toString();
     }
 
     public String getFactorizedPath() {
         return this.factorizePath();
+    }
+
+    public String getCanonicalizedPath() {
+        return this.canonicalizePath();
     }
 
 
