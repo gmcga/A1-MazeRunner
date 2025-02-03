@@ -5,17 +5,17 @@ public class Runner {
     private Direction current_dir;
     private int current_row;
     private int current_col;
-    private final int left_exit_row;
-    private final int right_exit_row;
+    private final int entrance_row;
+    private final int exit_row;
 
     
-    public Runner(MazeCell[][] maze, int start_row, int start_col, int left_exit_row, int right_exit_row, Direction start_dir) {
+    public Runner(MazeCell[][] maze, int start_row, int start_col, int entrance_row, int exit_row, Direction start_dir) {
         this.maze = maze;
         this.current_row = start_row;
         this.current_col = start_col;
         this.current_dir = start_dir;
-        this.left_exit_row = left_exit_row;
-        this.right_exit_row = right_exit_row;
+        this.entrance_row = entrance_row;
+        this.exit_row = exit_row;
     }
     // Moves the runner forward if possible.
     public boolean moveForward() {
@@ -55,10 +55,10 @@ public class Runner {
     // Checks if the runner is at the exit of the maze.
     public boolean atExit(char exit_side) {
         if (exit_side == 'R') {
-            return (current_col == maze.length-1 && current_row == right_exit_row);
+            return (current_col == maze.length-1 && current_row == exit_row);
         }
         else {// (exit_side == 'L') 
-            return (current_col == 0 && current_row == left_exit_row);
+            return (current_col == 0 && current_row == entrance_row);
         }
     }
 
