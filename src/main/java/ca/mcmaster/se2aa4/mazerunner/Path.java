@@ -1,5 +1,10 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+/**
+ * 
+ * The Path class provides methods for changing the form of a path (factorizing or canonicalizing it),
+ * and is used to store and add to a path while the MazeExplorer solves a maze.
+ */
 public class Path {
 
     private final StringBuilder path;

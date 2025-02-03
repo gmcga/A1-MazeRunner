@@ -1,8 +1,12 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-
+/**
+ * 
+ * The PathValidator class handles the necessary functionality 
+ * for validating a path provided by a user.
+ */
 public class PathValidator {
-
+    
     // Method to validate a path provided by a user.
     public static boolean validatePath(MazeCell[][] maze, int[] exits, String path) {
         // Try starting from the left side, and if that doesn't work try from the right.

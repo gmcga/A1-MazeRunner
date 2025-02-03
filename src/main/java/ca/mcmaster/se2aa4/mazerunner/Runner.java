@@ -1,4 +1,9 @@
 package ca.mcmaster.se2aa4.mazerunner;
+
+/**
+ * 
+ * The Runner class provides functionality for the creation of a Runner object that can move throughout a maze.
+ */
 public class Runner {
     
     private final MazeCell[][] maze;

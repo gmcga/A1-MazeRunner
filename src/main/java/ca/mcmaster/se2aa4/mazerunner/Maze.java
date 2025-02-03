@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * 
+ * The Maze class provides functionality for reading in a maze from a text file and storing it as a 2D array.
+ */
 public class Maze {
 
     private MazeCell[][] maze;
@@ -14,9 +18,10 @@ public class Maze {
         readMazeFromFile(maze_path);
         findExitCoordinates();
     }
-
-    // It might make sense to refactor this and the makeMazeArray methods to just be a constructor.
+    
+    // Method to read in a maze from a .txt file create a 2D array as a maze representation
     private void readMazeFromFile(String maze_path) throws FileNotFoundException, IOException { 
+        // First make an array of the correct size, then populate the array elements.
         makeMazeArray(maze_path);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(maze_path))) {
@@ -33,8 +38,8 @@ public class Maze {
         }
     }
 
+    // Method to create a maze 2D array of the proper size.
     private void makeMazeArray(String maze_path) throws FileNotFoundException, IOException {
-        // Method to create a maze 2D array of the proper size.
         int rows = 0;
         int cols = 0;
 
@@ -49,8 +54,8 @@ public class Maze {
         maze = new MazeCell[rows][cols];
     }
 
+    // Find the row on which the left and right exits occur.
     private void findExitCoordinates() {
-        // Find the row on which the left and right exits occur.
         int maze_length = maze.length;
 
         for (int row = 0; row < maze_length; row++) {
@@ -66,16 +71,14 @@ public class Maze {
                 break;
             }
         }
-
     }
 
+    // Getters for the maze and its exits.
     public MazeCell[][] getMaze() {
-        // Getter for the maze 2D array.
         return maze.clone();
     }
 
     public int[] getExits() {
-        // Getter for the exit coordinates of the maze.
         return exits;
     }
 

@@ -1,8 +1,13 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+/** 
+ * 
+ * The MazeExplorer class provides functionality for finding a valid path through a maze.
+ * Currently, the only solving method is the right-hand exploration method.
+ */
 public class MazeExplorer {
-    // Public method that calls the method that corresponds to the one provided by the user.
-    // Currently, only the right-hand exploration method is supported, but this can be expanded easily.
+    /*  Public method that calls the method that corresponds to the one provided by the user.
+    Currently, only the right-hand exploration method is supported, but this can be expanded easily. */
     public static String findPath(MazeCell[][] maze, int[] exits, SolvingMethod method, char starting_side) {
         if (method == SolvingMethod.RightHand) {
             return findPathRightHand(maze, exits);
