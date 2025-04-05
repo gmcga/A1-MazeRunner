@@ -18,7 +18,7 @@ public class MazeExplorer {
     }
 
     // Method to find the solution to a maze using the right-hand exploration method.
-    private static String findPathRightHand(MazeCell[][] maze, int[] exits) {
+    public static String findPathRightHand(MazeCell[][] maze, int[] exits) {
         
         Path path = new Path("");
         int left_exit_row = exits[0];
