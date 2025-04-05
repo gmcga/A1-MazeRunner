@@ -65,6 +65,7 @@ public class Maze {
             }
         }
 
+        
         for (int row = 0; row < maze_length; row++) {
             if (maze[row][maze_length - 1] == MazeCell.PASS) {
                 exits[1] = row;
